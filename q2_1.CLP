@@ -85,7 +85,7 @@
 (defrule calculate-result
 	(not (sickness ? ?))
 	(not (calculation ?))
-	?person <- (person (name ?name) (IC ?ic) (age ?age) (gender ?gender) (fever ?fever) (fatigue ?fatigue) (vomitstomach ?vomitstomach) (dizzy ?dizzy) (numb ?numb) (sleep ?sleep) (light ?light) (focus ?focus) (depression ?depression) (blurvision ?blurvision) (sorethroat ?sorethroat) (shiver ?shiver) (ache-joint ?ache-joint) (high-blood-pressure ?high-blood-pressure) (swallow ?swallow) (ct-scan-bleed ?ct-scan-bleed) (dry-mouth ?dry-mouth) (dark-urine ?dark-urine) (active-in-sport ?active-in-sport) (low-blood-pressure ?low-blood-pressure) (migraine-genetic ?migraine-genetic) (no-appetite ?no-appetite) (pale-skin ?pale-skin) (very-warm-or-cold ?very-warm-or-cold) (skip-meal ?skip-meal) (stress ?stress) (anxiety ?anxiety) (not-enough-rest ?not-enough-rest) (muscle-ache ?muscle-ache) (injury-fall ?injury-fall) (pupils-different-size ?pupils-different-size) (ringing-in-ears ?ringing-in-ears) (amnesia ?amnesia) (lost-consciousness ?lost-consciousness) (bladder-bowel-control ?bladder-bowel-control) (trouble-walking ?trouble-walking) (face-droop ?face-droop) (arm-weak ?arm-weak) (speech ?speech) (headache-remedy-fail ?headache-remedy-fail) (ct-scan-tumor ?ct-scan-tumor) (personality-change ?personality-change) (chest-pain ?chest-pain) (fear-of-dying ?fear-of-dying) (fear-of-losing-control ?fear-of-losing-control) (rapid-heartbeat ?rapid-heartbeat) (shaking-trembling ?shaking-trembling) (sweating ?sweating))
+	?person <- (person (name ?name) (IC ?ic) (age ?age) (gender ?gender) (fever ?fever) (fatigue ?fatigue) (vomitstomach ?vomitstomach) (dizzy ?dizzy) (numb ?numb) (sleep ?sleep) (light ?light) (focus ?focus) (depression ?depression) (blurvision ?blurvision) (sorethroat ?sorethroat) (shiver ?shiver) (ache-joint ?ache-joint) (high-blood-pressure ?high-blood-pressure) (swallow ?swallow) (ct-scan-bleed ?ct-scan-bleed) (dry-mouth ?dry-mouth) (dark-urine ?dark-urine) (active-in-sport ?active-in-sport) (low-blood-pressure ?low-blood-pressure)  (no-appetite ?no-appetite) (pale-skin ?pale-skin) (very-warm-or-cold ?very-warm-or-cold) (skip-meal ?skip-meal) (stress ?stress) (anxiety ?anxiety) (not-enough-rest ?not-enough-rest) (muscle-ache ?muscle-ache) (injury-fall ?injury-fall) (pupils-different-size ?pupils-different-size) (ringing-in-ears ?ringing-in-ears) (amnesia ?amnesia) (lost-consciousness ?lost-consciousness) (bladder-bowel-control ?bladder-bowel-control) (trouble-walking ?trouble-walking) (face-droop ?face-droop) (arm-weak ?arm-weak) (speech ?speech) (headache-remedy-fail ?headache-remedy-fail) (ct-scan-tumor ?ct-scan-tumor) (personality-change ?personality-change) (chest-pain ?chest-pain) (fear-of-dying ?fear-of-dying) (fear-of-losing-control ?fear-of-losing-control) (rapid-heartbeat ?rapid-heartbeat) (shaking-trembling ?shaking-trembling) (sweating ?sweating))
 	=>
 	;;;;;;;;;;;;;;Set all initial values with 0
 	(bind ?flu 0)
@@ -116,6 +116,7 @@
 	(if (eq ?vomitstomach y) then
 		(bind ?flu (+ ?flu 1))
 		(bind ?concussion (+ ?concussion 1))
+		(bind ?migraine (+ ?migraine 1))
 		(bind ?dehydration (+ ?dehydration 1))
 		(bind ?panic-attack (+ ?panic-attack 1))
 	)
@@ -148,7 +149,6 @@
 	(if (eq ?focus y) then
 		(bind ?tension-headache (+ ?tension-headache 1))
 		(bind ?concussion (+ ?concussion 1))
-		(bind ?migraine (+ ?migraine 1))
 		(bind ?brain-tumor (+ ?brain-tumor 1))
 	)
 
@@ -165,6 +165,7 @@
 	;;;;;;;;;;Calculation for specific questions
 	(if (eq ?sorethroat y) then
 		(bind ?flu (+ ?flu 2))
+		(bind ?dehydration (+ ?dehydration 2))
 	)
 
 	(if (eq ?shiver y) then
@@ -203,12 +204,9 @@
 		(bind ?dehydration (+ ?dehydration 2))
 	)
 
-	(if (eq ?migraine-genetic y) then
-		(bind ?migraine (+ ?migraine 2))
-	)
-
 	(if (eq ?no-appetite y) then
 		(bind ?migraine (+ ?migraine 2))
+		(bind ?concussion (+ ?concussion 2))
 	)
 	
 	(if (eq ?pale-skin y) then
@@ -265,6 +263,7 @@
 
 	(if (eq ?trouble-walking y) then
 		(bind ?stroke (+ ?stroke 2))
+		(bind ?brain-tumor (+ ?brain-tumor 2))
 	)
 
 	(if (eq ?face-droop y) then
@@ -327,22 +326,22 @@
 		(bind ?brain-hemorrhage (/ ?brain-hemorrhage 6))
 	)
 	(if (> ?dehydration 0) then
-		(bind ?dehydration (/ ?dehydration 8))
+		(bind ?dehydration (/ ?dehydration 9))
 	)
 	(if (> ?migraine 0) then
-		(bind ?migraine (/ ?migraine 10))
+		(bind ?migraine (/ ?migraine 9))
 	)
 	(if (> ?tension-headache 0) then
 		(bind ?tension-headache (/ ?tension-headache 8))
 	)
 	(if (> ?concussion 0) then
-		(bind ?concussion (/ ?concussion 11))
+		(bind ?concussion (/ ?concussion 12))
 	)
 	(if (> ?stroke 0) then
-		(bind ?stroke (/ ?stroke 9))
+		(bind ?stroke (/ ?stroke 8))
 	)
 	(if (> ?brain-tumor 0) then
-		(bind ?brain-tumor (/ ?brain-tumor 6))
+		(bind ?brain-tumor (/ ?brain-tumor 7))
 	)
 	(if (> ?panic-attack 0) then
 		(bind ?panic-attack (/ ?panic-attack 9))
