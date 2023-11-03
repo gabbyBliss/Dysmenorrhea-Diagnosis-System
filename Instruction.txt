@@ -1,3 +1,17 @@
-To run the system from source code, there are two steps to be followed.
-First, load the codes from q2.CLP.
-Then, only the the codes from q2_1.CLP
+Usage:
+
+1. After installing CLIPS, navigate to the directory containing the Dysmenorrhea Diagnosis System files.
+
+2. Load the CLIPS rule and data files using the CLIPS command-line tool. Use the following commands:
+
+   ```shell
+   clips -f DysmenorrheaDiagnosisMain.clp
+   clips -f DysmenorrheaDiagnosisData.clp
+   ```
+
+3. Run the system using the CLIPS environment with the following command:
+
+   ```shell
+   (reset)
+   (run)
+   ```
